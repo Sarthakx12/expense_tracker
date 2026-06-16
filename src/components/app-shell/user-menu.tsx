@@ -27,16 +27,18 @@ export function UserMenu({ email, fullName }: { email: string | undefined, fullN
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-full">
-          <Avatar className="h-9 w-9 border border-zinc-800 transition-opacity hover:opacity-80">
-            <AvatarImage src="" alt={fullName || email || "User Avatar"} />
-            <AvatarFallback className="bg-zinc-900 text-zinc-300 font-medium text-xs">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-        </button>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger
+        render={
+          <button className="outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-full">
+            <Avatar className="h-9 w-9 border border-zinc-800 transition-opacity hover:opacity-80">
+              <AvatarImage src="" alt={fullName || email || "User Avatar"} />
+              <AvatarFallback className="bg-zinc-900 text-zinc-300 font-medium text-xs">
+                {initials}
+              </AvatarFallback>
+            </Avatar>
+          </button>
+        }
+      />
       <DropdownMenuContent align="end" className="w-56 bg-zinc-950 border-zinc-800 text-zinc-300 shadow-xl shadow-black/50">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
