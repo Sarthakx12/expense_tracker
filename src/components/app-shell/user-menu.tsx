@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { LogOut, User } from 'lucide-react'
 
 export function UserMenu({ email, fullName }: { email: string | undefined, fullName: string | undefined }) {
   const router = useRouter()
@@ -27,34 +26,41 @@ export function UserMenu({ email, fullName }: { email: string | undefined, fullN
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-full">
-          <Avatar className="h-9 w-9 border border-zinc-800 transition-opacity hover:opacity-80">
-            <AvatarImage src="" alt={fullName || email || "User Avatar"} />
-            <AvatarFallback className="bg-zinc-900 text-zinc-300 font-medium text-xs">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-        </button>
+      <DropdownMenuTrigger
+        render={
+          <button className="outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full relative" />
+        }
+      >
+        <Avatar className="h-9 w-9 border border-outline-variant/50 transition-opacity hover:opacity-80 shadow-sm">
+          <AvatarImage src="" alt={fullName || email || "User Avatar"} />
+          <AvatarFallback className="bg-primary-container text-on-primary-container font-medium text-xs">
+            {initials}
+          </AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 bg-zinc-950 border-zinc-800 text-zinc-300 shadow-xl shadow-black/50">
-        <DropdownMenuLabel className="font-normal">
+      <DropdownMenuContent align="end" className="w-56 clay-raised border-outline-variant/30 text-on-surface rounded-xl mt-2">
+        <DropdownMenuLabel className="font-normal px-4 py-3">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none text-zinc-100">{fullName || 'User'}</p>
-            <p className="text-xs leading-none text-zinc-500">{email}</p>
+            <p className="text-sm font-medium leading-none text-on-surface">{fullName || 'User'}</p>
+            <p className="text-xs leading-none text-on-surface-variant mt-1">{email}</p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-zinc-800" />
-        <DropdownMenuItem className="focus:bg-zinc-900 focus:text-zinc-100 cursor-pointer">
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
+        <DropdownMenuSeparator className="bg-outline-variant/30" />
+        <DropdownMenuItem className="focus:bg-surface-container-high focus:text-primary cursor-pointer px-4 py-3 mx-1 my-1 rounded-lg">
+          <span className="material-symbols-outlined mr-2 text-[20px]">person</span>
+          <span className="font-label-sm text-label-sm">Profile</span>
         </DropdownMenuItem>
+        <DropdownMenuItem className="focus:bg-surface-container-high focus:text-primary cursor-pointer px-4 py-3 mx-1 my-1 rounded-lg">
+          <span className="material-symbols-outlined mr-2 text-[20px]">settings</span>
+          <span className="font-label-sm text-label-sm">Settings</span>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator className="bg-outline-variant/30" />
         <DropdownMenuItem 
           onClick={handleSignOut}
-          className="text-red-400 focus:bg-red-950/30 focus:text-red-400 cursor-pointer"
+          className="text-error focus:bg-error-container/50 focus:text-error cursor-pointer px-4 py-3 mx-1 my-1 rounded-lg"
         >
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Sign out</span>
+          <span className="material-symbols-outlined mr-2 text-[20px]">logout</span>
+          <span className="font-label-sm text-label-sm">Sign out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

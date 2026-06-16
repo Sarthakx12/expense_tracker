@@ -2,9 +2,9 @@
 
 import { UserMenu } from './user-menu'
 import { Sidebar } from './sidebar'
-import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 interface TopbarProps {
   userEmail?: string
@@ -13,26 +13,32 @@ interface TopbarProps {
 
 export function Topbar({ userEmail, userFullName }: TopbarProps) {
   return (
-    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-x-4 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md px-4 sm:gap-x-6 sm:px-6 lg:px-8">
-      {/* Mobile Menu Trigger */}
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="lg:hidden text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900">
+    <header className="lg:hidden sticky top-0 z-40 w-full h-16 bg-surface/80 backdrop-blur-md flex justify-between items-center px-lg shadow-[4px_4px_10px_rgba(0,0,0,0.05),-4px_-4px_10px_rgba(255,255,255,0.8)]">
+      <div className="flex items-center gap-2">
+        <Sheet>
+          <SheetTrigger
+            render={
+              <button className="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full active:scale-95 transition-all lg:hidden" />
+            }
+          >
             <span className="sr-only">Open sidebar</span>
-            <Menu className="h-6 w-6" aria-hidden="true" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="p-0 bg-zinc-950 border-zinc-800 w-72">
-          <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-          <Sidebar className="w-full border-r-0" />
-        </SheetContent>
-      </Sheet>
+            <span className="material-symbols-outlined" aria-hidden="true">menu</span>
+          </SheetTrigger>
+          <SheetContent side="left" className="p-0 bg-background border-outline-variant/30 w-72">
+            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+            <Sidebar className="w-full relative flex h-full shadow-none border-none" />
+          </SheetContent>
+        </Sheet>
+        <Link href="/dashboard" className="lg:hidden">
+          <h1 className="font-headline-md text-headline-md font-bold text-primary">PaisaIQ</h1>
+        </Link>
+      </div>
 
-      <div className="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
-        <div className="flex items-center gap-x-4 lg:gap-x-6">
-          {/* User profile dropdown */}
-          <UserMenu email={userEmail} fullName={userFullName} />
-        </div>
+      <div className="flex items-center gap-4">
+        <button className="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full active:scale-95 transition-all">
+          <span className="material-symbols-outlined">notifications</span>
+        </button>
+        <UserMenu email={userEmail} fullName={userFullName} />
       </div>
     </header>
   )

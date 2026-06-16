@@ -20,19 +20,17 @@ export default async function ProtectedLayout({
   const userFullName = user.user_metadata?.full_name as string | undefined
 
   return (
-    <div className="flex h-screen overflow-hidden bg-zinc-950">
+    <div className="flex h-screen overflow-hidden bg-background text-on-background">
       {/* Desktop Sidebar */}
-      <div className="hidden lg:flex lg:flex-shrink-0">
-        <Sidebar />
-      </div>
+      <Sidebar />
 
-      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden lg:ml-64">
         {/* Topbar with Mobile Menu & User Profile */}
         <Topbar userEmail={user.email} userFullName={userFullName} />
 
         {/* Main Content Area */}
-        <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-8">
+        <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none scroll-smooth">
+          <div className="mx-auto max-w-container-max w-full p-margin-mobile md:p-gutter">
             {children}
           </div>
         </main>

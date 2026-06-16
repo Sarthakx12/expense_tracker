@@ -3,99 +3,56 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { 
-  LayoutDashboard, 
-  ArrowLeftRight, 
-  Bot, 
-  Wallet, 
-  Target, 
-  Settings,
-} from 'lucide-react'
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Transactions', href: '/transactions', icon: ArrowLeftRight },
-  { name: 'Assistant', href: '/assistant', icon: Bot },
-  { name: 'Budgets', href: '/budgets', icon: Wallet },
-  { name: 'Goals', href: '/goals', icon: Target },
-]
-
-const bottomNav = [
-  { name: 'Settings', href: '/settings', icon: Settings },
+  { name: 'Dashboard', href: '/dashboard', icon: 'dashboard' },
+  { name: 'Transactions', href: '/transactions', icon: 'swap_horiz' },
+  { name: 'Assistant', href: '/assistant', icon: 'smart_toy' },
+  { name: 'Budgets', href: '/budgets', icon: 'account_balance_wallet' },
+  { name: 'Goals', href: '/goals', icon: 'track_changes' },
 ]
 
 export function Sidebar({ className }: { className?: string }) {
   const pathname = usePathname()
 
   return (
-    <div className={cn("flex flex-col h-full bg-zinc-950 border-r border-zinc-800 text-zinc-300 w-64", className)}>
-      <div className="flex h-16 shrink-0 items-center px-6">
-        <Link href="/dashboard" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <Wallet className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-lg font-bold bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent tracking-tight">
-            Finance App
-          </span>
+    <nav className={cn("hidden lg:flex flex-col h-screen w-64 fixed left-0 top-0 z-50 bg-surface-container-low/90 backdrop-blur-xl border-r border-outline-variant/30 shadow-[10px_0_30px_rgba(0,0,0,0.03)] py-lg gap-sm", className)}>
+      <div className="px-lg mb-8">
+        <Link href="/dashboard" className="block transition-opacity hover:opacity-80">
+          <h1 className="font-headline-md text-headline-md font-extrabold bg-gradient-to-tr from-primary to-tertiary bg-clip-text text-transparent">PaisaIQ</h1>
+          <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">Premium Tier</p>
         </Link>
       </div>
-      <div className="flex flex-col flex-1 px-3 py-6 overflow-y-auto">
-        <nav className="flex-1 space-y-1">
-          {navigation.map((item) => {
-            const isActive = pathname.startsWith(item.href)
+      
+      <div className="flex-1 flex flex-col gap-unit overflow-y-auto px-4">
+        {navigation.map((item) => {
+          const isActive = pathname.startsWith(item.href)
+          
+          if (isActive) {
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={cn(
-                  isActive
-                    ? 'bg-zinc-900 text-indigo-400'
-                    : 'text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-100',
-                  'group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors'
-                )}
+                className="bg-primary text-on-primary shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.1),inset_2px_2px_4px_rgba(255,255,255,0.2)] rounded-xl mx-2 my-1 px-4 py-3 flex items-center gap-3 transition-all duration-300"
               >
-                <item.icon
-                  className={cn(
-                    isActive ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-300',
-                    'mr-3 h-5 w-5 flex-shrink-0 transition-colors'
-                  )}
-                  aria-hidden="true"
-                />
-                {item.name}
+                <span className="material-symbols-outlined icon-fill">{item.icon}</span>
+                <span className="font-label-sm text-label-sm">{item.name}</span>
               </Link>
             )
-          })}
-        </nav>
-        
-        <div className="mt-8 pt-6 border-t border-zinc-800/50">
-          <nav className="space-y-1">
-            {bottomNav.map((item) => {
-              const isActive = pathname.startsWith(item.href)
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    isActive
-                      ? 'bg-zinc-900 text-indigo-400'
-                      : 'text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-100',
-                    'group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors'
-                  )}
-                >
-                  <item.icon
-                    className={cn(
-                      isActive ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-300',
-                      'mr-3 h-5 w-5 flex-shrink-0 transition-colors'
-                    )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
+          }
+
+          return (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-on-surface-variant hover:text-primary mx-2 my-1 px-4 py-3 hover:bg-surface-container-high rounded-xl group hover:translate-x-1 transition-all duration-300 flex items-center gap-3"
+            >
+              <span className="material-symbols-outlined">{item.icon}</span>
+              <span className="font-label-sm text-label-sm">{item.name}</span>
+            </Link>
+          )
+        })}
       </div>
-    </div>
+    </nav>
   )
 }

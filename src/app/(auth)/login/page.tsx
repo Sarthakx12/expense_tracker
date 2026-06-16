@@ -51,16 +51,16 @@ export default async function LoginPage({
   }
 
   return (
-    <Card className="border-zinc-800 bg-zinc-900/50 backdrop-blur-xl">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-semibold tracking-tight text-zinc-100">Sign in</CardTitle>
-        <CardDescription className="text-zinc-400">
+    <Card className="border-none bg-surface/90 backdrop-blur-xl clay-raised rounded-3xl overflow-hidden">
+      <CardHeader className="space-y-1 pb-6 pt-8">
+        <CardTitle className="text-2xl font-headline-md font-semibold tracking-tight text-on-surface">Sign in</CardTitle>
+        <CardDescription className="text-on-surface-variant font-body-md">
           Enter your email and password to access your account
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <form action={signInWithGoogle}>
-          <Button variant="outline" className="w-full bg-zinc-900 text-zinc-100 hover:bg-zinc-800 hover:text-white border-zinc-700" type="submit">
+          <Button variant="outline" className="w-full bg-surface clay-sunken text-on-surface hover:bg-surface-container border-none h-12 rounded-xl font-label-sm" type="submit">
             <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -83,50 +83,50 @@ export default async function LoginPage({
             Sign in with Google
           </Button>
         </form>
-        <div className="relative">
+        <div className="relative py-2">
           <div className="absolute inset-0 flex items-center">
-            <Separator className="w-full border-zinc-800 bg-zinc-800" />
+            <Separator className="w-full border-outline-variant/30 bg-outline-variant/30" />
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-zinc-900 px-2 text-zinc-500">Or continue with</span>
+          <div className="relative flex justify-center text-xs uppercase font-label-sm">
+            <span className="bg-surface px-2 text-on-surface-variant">Or continue with</span>
           </div>
         </div>
         <form action={signIn} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-zinc-300">Email</Label>
+            <Label htmlFor="email" className="text-on-surface font-label-sm">Email</Label>
             <Input
               id="email"
               name="email"
               type="email"
               placeholder="m@example.com"
               required
-              className="bg-zinc-950/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-indigo-500"
+              className="bg-surface-container clay-sunken border-none text-on-surface placeholder:text-outline-variant focus-visible:ring-primary h-12 rounded-xl"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-zinc-300">Password</Label>
+            <Label htmlFor="password" className="text-on-surface font-label-sm">Password</Label>
             <Input
               id="password"
               name="password"
               type="password"
               required
-              className="bg-zinc-950/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-indigo-500"
+              className="bg-surface-container clay-sunken border-none text-on-surface placeholder:text-outline-variant focus-visible:ring-primary h-12 rounded-xl"
             />
           </div>
           {message && (
-            <p className="text-sm font-medium text-red-500 mt-2 p-3 bg-red-950/30 rounded-md border border-red-900/50">
+            <p className="text-sm font-medium text-error mt-2 p-3 bg-error-container/30 rounded-xl border border-error/20 font-label-sm">
               {message}
             </p>
           )}
-          <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white" type="submit">
+          <Button className="w-full clay-button-primary hover:opacity-90 transition-opacity border-none h-12 rounded-xl font-label-sm mt-4" type="submit">
             Sign In
           </Button>
         </form>
       </CardContent>
-      <CardFooter>
-        <p className="text-sm text-center text-zinc-400 w-full">
+      <CardFooter className="pb-8">
+        <p className="text-sm text-center text-on-surface-variant w-full font-body-md">
           Don't have an account?{' '}
-          <Link href="/signup" className="text-indigo-400 hover:text-indigo-300 font-medium">
+          <Link href="/signup" className="text-primary hover:text-primary-container font-semibold transition-colors">
             Sign up
           </Link>
         </p>
